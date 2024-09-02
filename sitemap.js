@@ -5,7 +5,6 @@
 // ---------------------------------------------------
 
 // global arrays
-
    var postTitle = new Array();     // array of posttitles
    var postUrl = new Array();       // array of posturls
    var postDate = new Array();      // array of post publish dates
@@ -22,7 +21,6 @@
    var totalPosts =0; //Total number of posts in the blog.
 
 // main callback function
-
 function loadtoc(json) {
 
    function getPostData() {
@@ -81,7 +79,7 @@ function loadtoc(json) {
             var pll = '';
             if ("category" in entry) {
                for (var k = 0; k < entry.category.length; k++) {
-                  pll += '<a href="javascript:filterPosts(\'' + entry.category[k].term + '\');" title="Click here to select all posts with label \'' + entry.category[k].term + '\'">' + entry.category[k].term + '</a>,  ';
+                  pll += '<a href="javascript:filterPosts(\'' + entry.category[k].term + '\');" title="Show all posts in the category \'' + entry.category[k].term + '\'">' + entry.category[k].term + '</a>,  ';
                }
             var l = pll.lastIndexOf(',');
             if (l != -1) { pll = pll.substring(0,l); }
@@ -110,10 +108,7 @@ function loadtoc(json) {
    tocLoaded = true;
 }
 
-
-
 // filter and sort functions
-
 
 function filterPosts(filter) {
 // This function changes the filter
@@ -170,40 +165,40 @@ function displayToc(filter) {
 // this function creates a three-column table and adds it to the screen
    var numDisplayed = 0;
    var tocTable = '';
-   var tocHead1 = 'POST TITLE';
-   var tocTool1 = 'Click to sort by title';
-   var tocHead2 = 'POST DATE';
-   var tocTool2 = 'Click to sort by date';
-   var tocHead3 = 'LABELS';
+   var tocHead1 = 'POSTS';
+   var tocTool1 = 'Sort by titles';
+   var tocHead2 = 'DATE';
+   var tocTool2 = 'Sort by date';
+   var tocHead3 = 'CATEGORY';
    var tocTool3 = '';
    if (sortBy == "titleasc") { 
       tocTool1 += ' (descending)';
-      tocTool2 += ' (newest first)';
+      tocTool2 += ' (latest)';
    }
    if (sortBy == "titledesc") { 
       tocTool1 += ' (ascending)';
-      tocTool2 += ' (newest first)';
+      tocTool2 += ' (latest)';
    }
    if (sortBy == "dateoldest") { 
       tocTool1 += ' (ascending)';
-      tocTool2 += ' (newest first)';
+      tocTool2 += ' (latest)';
    }
    if (sortBy == "datenewest") { 
       tocTool1 += ' (ascending)';
-      tocTool2 += ' (oldest first)';
+      tocTool2 += ' (oldest)';
    }
    if (postFilter != '') {
       tocTool3 = 'Click to show all posts';
    }
    tocTable += '<table>';
    tocTable += '<tr>';
-   tocTable += '<td class="toc-header-col1">';
+   tocTable += '<td class="toc-header-col1" style="font-weight: bold;">';
    tocTable += '<a href="javascript:toggleTitleSort();" title="' + tocTool1 + '">' + tocHead1 + '</a>';
    tocTable += '</td>';
-   tocTable += '<td class="toc-header-col2">';
+   tocTable += '<td class="toc-header-col2" style="font-weight: bold;">';
    tocTable += '<a href="javascript:toggleDateSort();" title="' + tocTool2 + '">' + tocHead2 + '</a>';
    tocTable += '</td>';
-   tocTable += '<td class="toc-header-col3">';
+   tocTable += '<td class="toc-header-col3" style="font-weight: bold;">';
    tocTable += '<a href="javascript:allPosts();" title="' + tocTool3 + '">' + tocHead3 + '</a>';
    tocTable += '</td>';
    tocTable += '</tr>';
@@ -221,10 +216,10 @@ function displayToc(filter) {
    }
    tocTable += '</table>';
    if (numDisplayed == postTitle.length) {
-      var tocNote = '<span class="toc-note">Displaying all ' + postTitle.length + ' posts<br/></span>'; }
+      var tocNote = '<span class="toc-note">Show all ' + postTitle.length + ' post<br/><br/></span>'; }
    else {
-      var tocNote = '<span class="toc-note">Displaying ' + numDisplayed + ' posts labeled \'';
-      tocNote += postFilter + '\' of '+ postTitle.length + ' posts total<br/></span>';
+      var tocNote = '<span class="toc-note">Show ' + numDisplayed + ' post in category \'';
+      tocNote += postFilter + '\' in '+ postTitle.length + ' posts<br/><br/></span>';
    }
    tocdiv.innerHTML = tocNote + tocTable;
 } // end of displayToc
@@ -243,7 +238,6 @@ function toggleDateSort() {
    displayToc(postFilter);
 } // end toggleTitleSort
 
-
 function showToc() {
   if (tocLoaded) { 
      displayToc(postFilter);
@@ -257,5 +251,5 @@ function hideToc() {
   var tocdiv = document.getElementById("toc");
   tocdiv.innerHTML = '';
   var toclink = document.getElementById("toclink");
-  toclink.innerHTML = '<a href="#" onclick="scroll(0,0); showToc(); Effect.toggle('+"'toc-result','blind');"+'">» Show Table of Contents</a> <img src="http://chenkaie.blog.googlepages.com/new_1.gif"/>';
+  toclink.innerHTML = '<a href="#" onclick="scroll(0,0); showToc(); Effect.toggle('+"'toc-result','blind');"+'">» Show table of content</a> <img src="https://3.bp.blogspot.com/-OJVzWx2-ubY/Wxga_uZJTTI/AAAAAAAALlY/O3SvsrILwRMUSam-7hqH1TxevLrWJr_GACLcBGAs/s1600/new_1.gif"/>';
 }
